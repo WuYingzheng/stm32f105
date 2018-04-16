@@ -1,0 +1,16 @@
+openocd -f '/usr/local/share/openocd/scripts/interface/stlink-v2.cfg' -f '/usr/local/share/openocd/scripts/target/stm32f1x.cfg' -s /usr/local/share/openocd/scripts/
+
+JLinkGDBServer -device Cortex-M3 -if swd
+
+break main
+arm-none-eabi-gdb
+target remote localhost:3333
+
+target remote localhost:2331
+
+file /home/wyz/stm-32/project/hello/main.elf
+load
+continue
+
+
+monitor reset halt
